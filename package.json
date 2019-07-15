@@ -4,7 +4,7 @@
   "description": "Playground for Ethereum network",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dapp": "./node_modules/.bin/http-server dapp"
   },
   "keywords": [
     "etheteum",
@@ -15,9 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "ethereumjs-tx": "^2.1.0",
+    "http-server": "^0.11.1",
     "lodash": ">=4.17.13",
+    "mem": ">=4.0.0",
     "solc": "^0.5.10",
-    "web3": "^1.0.0-beta.55",
-    "mem": ">=4.0.0"
+    "web3": "^1.0.0-beta.55"
   }
 }
