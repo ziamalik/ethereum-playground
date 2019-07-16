@@ -14,14 +14,14 @@
 
 <body>
     <div>
-        <h1>Ethereum Secret Messenger</h1>
+        <h1>Ethereum Messenger</h1>
         <hr>
 
-        <label for="message">This site writes a secret message to the Ethereum
+        <label for="message">This site writes a message to the Ethereum
             blockchain!</label>
         <input id="userInput" type="text">
 
-        <button id="setMessageButton">Set secret message</button>
+        <button id="setMessageButton">Set message</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -31,12 +31,15 @@
         // Connect a the web3 provider
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
+            console.log("first");
         } else {
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            console.log("second");
         }
 
         // Set a default account
         web3.eth.defaultAccount = web3.eth.accounts[0];
+        console.log("Account: " + web3.eth.accounts[0]);
 
         // Get the contract address
         var RemixContract = web3.eth.contract([
@@ -71,13 +74,15 @@
         ]);
 
         // Get the contract abi
-        var myMessage = RemixContract.at('0xc00e64fae1bb3e081b416c8a49f75b4879c1525f');
+        var SimpleMessage = RemixContract.at('0x40E87764F0c53fa9e3daB0E69757B83F0f011EF2');
+        
 
-        console.log(myMessage);
+        console.log(SimpleMessage);
 
         $("#setMessageButton").click(function () {
-            myMessage.setMessage($("#userInput").val());
-            console.log($("#userInput").val())
+            var message = $("#userInput").val();
+            SimpleMessage.setMessage(message, (error, result) => {message = result});;
+            console.log($("#userInput").val());
         });
 
     </script>
